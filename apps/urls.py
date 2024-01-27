@@ -1,14 +1,9 @@
 from django.conf import urls
 from django.contrib.auth.views import LogoutView
-from django.http import JsonResponse
 from django.shortcuts import render
 from django.urls import path, include
 
-from apps.tasks import task_send_email
 from apps.views import IndexView, CustomLoginView, RegisterFormView, BlogDetailView, BlogListView
-
-
-
 
 urlpatterns = [
     path('', IndexView.as_view(), name='index_page'),

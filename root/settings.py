@@ -1,5 +1,17 @@
-import os.path
+# Application definition
+# Application definition
+# Application definition
+# Application definition
+# Application definition
+# Application definition
+# Application definition
+# Application definition
+import os
 from pathlib import Path
+
+import dj_database_url
+from dotenv import load_dotenv
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -15,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+load_dotenv()
 # Application definition
 
 INSTALLED_APPS = [
@@ -27,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'apps.apps.AppsConfig',
     'django_ckeditor_5',
+    'django_celery_results'
 ]
 
 MIDDLEWARE = [
@@ -63,11 +77,19 @@ AUTH_USER_MODEL = 'apps.User'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": os.environ.get('django_db'),
+#         "USER": os.environ.get("postgres"),
+#         "PASSWORD": os.environ.get("1"),
+#         "HOST": "localhost",
+#         'PORT': 5432
+#     }
+# }
+print(os.getenv('DB_URL'), 11111111111111)
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / 'db.sqlite3'
-    }
+    'default': dj_database_url.config(default=os.getenv('DB_URL'))
 }
 
 # Password validation
@@ -378,22 +400,13 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 465
 EMAIL_USE_SSL = True
-EMAIL_HOST_USER = 'xolmomin@gmail.com'
-EMAIL_HOST_PASSWORD = 'ociwfmayunenrmji'
+EMAIL_HOST_USER = 'shamsiddinpython215@gmail.com'
+EMAIL_HOST_PASSWORD = 'fidohiawdjaqnolc'
 
 CELERY_BROKER_URL = 'redis://localhost:6379/0'
 # CELERY_RESU
 
-
-# MQ
-# redis
-# rabbitmq
-
-
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_RESULT_EXPIRES = True
 
 # docker run -p 6379:6379 -it redis/redis-stack:latest
-
-
-# pip install psycopg2-binary
-# pip install redis
-# pip install celery[redis]
