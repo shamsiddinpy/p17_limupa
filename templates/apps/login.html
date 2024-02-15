@@ -1,5 +1,4 @@
 {% extends 'apps/base.html' %}
-
 {% block main_content %}
     <div class="breadcrumb-area">
         <div class="container">
@@ -15,7 +14,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-xs-12 col-lg-6 mb-30">
-                    <!-- Login Form s-->
                     <form action="{% url 'login_page' %}" method="post">
                         {% csrf_token %}
                         <div class="login-form">
